@@ -168,9 +168,14 @@ class DoublyLinkedList:
 
         current_max = self.head.value
         current = self.head.next
+        #Checks is first value in the list
         while current is not None:
+        # checks if the current value is bigger than the maximum value in the list
             if current.value > current_max:
+                # if it is, then make that the new biggest value in the list
                 current_max = current.value
+            # Now check the next value and do the same process to find out if there are bigger values than the current
             current = current.next
+        # If it is  the first value, then it is the only one in the list and it becomes the current max
         return current_max
 
