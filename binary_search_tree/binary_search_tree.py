@@ -44,16 +44,61 @@ class BSTNode:
 
     # Return True if the tree contains the value
     # False if it does not
+
+
     def contains(self, target):
-        pass
+        #Check if the root value is the target
+
+        if self.value ==  target:  
+        #if it is, return True(the number is contained in the tree),
+            return True
+        # no more needs to be done
+
+        # if the target is not the root, then check if the target is 
+        # bigger than the current value
+        if target > self.value:
+        # if it is, check if the right of the current value is empty or not
+            if self.right is None:
+        # if it is empty, return False(there are no more numbers to check, and thus the number is not in the tree)
+                return False
+        # if there is a next node, then return a recursion and repeat the method, this time with the next node as the value
+            else: 
+                return self.right.contains(target)
+        # now check the left side
+        # if the target is smaller than the current value:
+        # check if the next node is empty or not
+        if target < self.value:
+        # if it is empty, return False (nothing else to search for)
+            if self.left is None:
+                return False
+        # if it is not empty, return a recursion and repeat the method for the left side
+            else:
+                return self.left.contains(target)
+
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+    # check the biggest number in the tree
+    # if the next right node is empty, then the biggest node is the root
+        if self.right is None:
+            # return that value 
+            return self.value
+    # if there is another number, return a recursion to check the next node
+        else:
+            return self.right.get_max()
+
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+        if self.right is not None:
+            self.right.for_each(fn)
+        if self.left is not None:
+            self.left.for_each(fn)
+
+
+
+
 
     # Part 2 -----------------------
 
