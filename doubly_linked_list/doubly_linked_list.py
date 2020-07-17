@@ -163,19 +163,36 @@ class DoublyLinkedList:
     Finds and returns the maximum value of all the nodes 
     in the List.
     """
+    # def get_max(self):
+    #     # init a variable that will keep track of  the largest element we've seen so far
+
+    #     current_max = self.head.value
+    #     current = self.head.next
+    #     #Checks if there are more values in the list
+    #     while current is not None:
+    #     # checks if the current value is bigger than the maximum value in the list
+    #         if current.value > current_max:
+    #             # if it is, then make that the new biggest value in the list
+    #             current_max = current.value
+    #         # Now check the next value and do the same process to find out if there are bigger values than the current
+    #         current = current.next
+    #     # If it is  the only value, then it is the current maximum value and it is returned as the current_max
+    #     return current_max
+
+
     def get_max(self):
-        # init a variable that will keep track of  the largest element we've seen so far
+        #start at the head
+        start = self.head
+        # store the start value on a variable so we can update if a bigger number appears in the list
+        max_val = start.value
+        # loop through list until the end
+        while start is not None:
+            # compare start's value to the max_value
+            if start.value > max_val:
+                # update max value to be the start value
+                max_val = start.value
 
-        current_max = self.head.value
-        current = self.head.next
-        #Checks is first value in the list
-        while current is not None:
-        # checks if the current value is bigger than the maximum value in the list
-            if current.value > current_max:
-                # if it is, then make that the new biggest value in the list
-                current_max = current.value
-            # Now check the next value and do the same process to find out if there are bigger values than the current
-            current = current.next
-        # If it is  the first value, then it is the only one in the list and it becomes the current max
-        return current_max
-
+            # update start to be the next value 
+            start = start.next
+        
+        return max_val

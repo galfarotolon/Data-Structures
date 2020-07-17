@@ -9,6 +9,8 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 
+from queue import Queue
+from stack import Stack
 
 class BSTNode:
     def __init__(self, value):
@@ -77,6 +79,9 @@ class BSTNode:
 
 
     # Return the maximum value found in the tree
+
+    # Recursive version:
+
     def get_max(self):
     # check the biggest number in the tree
     # if the next right node is empty, then the biggest node is the root
@@ -88,13 +93,91 @@ class BSTNode:
             return self.right.get_max()
 
 
+    # iterative version:
+
+    # def get_max(self):
+      
+    #     # keep a current pointer to keep track of where we are in the tree
+    #     current = self
+    #     # iterate down the right child of the current node
+    #     while current.right is not None:
+    #         # until we no longer have a right child to go to next
+    #         current = current.right
+    #     return current.value
+
+    
+
+
+    # recursive way:
+
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
+
+        # call the anonymous function on self.value
         fn(self.value)
+        # if this node has a left child
+        
         if self.right is not None:
+            # pass the anonymous function to it
             self.right.for_each(fn)
+        #if this node has a right child
+        
         if self.left is not None:
+            # pass the anonymous function to it
             self.left.for_each(fn)
+
+
+    # iterative way DFT: 
+
+    # def for_each(self, fn):
+    #     # DFT: Last In First Out (LIFO)
+    #     # we'll use a stack
+
+    #     stack = []
+    #     stack.append(self)
+
+    #     # so long as our stack has nodes in it,
+    #     # there's more nodes to traverse
+
+    #     while len(stack) > 0:
+    #         # pop the top node from the stack
+    #         current = stack.pop()
+
+    #         # add the current node's right child first
+    #         if current.right:
+    #             stack.append(current.right)
+            
+    #         # add the current node's left child
+    #         if current.left:
+    #             stack.append(current.left)
+
+            
+    #         # Call the anonymous function
+    #         fn(current.value)
+
+    #     # iterative way BFT: 
+    # def for_each(self, fn):
+    #     from collections import dequeue
+    #     # BFT : First In First Out (FIFO)
+    #     # we'll use a queue to facilitate ordering
+
+    #     queue = deque()
+    #     queue.append(self)
+
+    #     # continue to traverse as long as there are 
+    #     # nodes in the queue
+
+    #     while len(queue) > 0:
+    #         current = queue.popleft()
+
+    #         if current.left:
+    #             queue.append(current.left)
+
+    #         if current.right:
+    #             queue.append(current.right)
+
+    #         fn(current.value)
+
 
 
 
@@ -105,17 +188,60 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if self.left is not None:
+            self.left.in_order_print(node)
+        print(self.value)
 
+        if self.right is not None:
+            self.right.in_order_print(node)
+        # print(self.value)
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if node is None:
+            return
+        
+        queue = Queue()
+
+        queue.enqueue(node)
+
+        while len(queue) > 0:
+            
+            node = queue.dequeue()
+
+            print(node.value)
+
+            if node.left:
+                queue.enqueue(node.left)
+            if node.right:
+                queue.enqueue(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+       
+        if node is None:
+            return
+
+        stack = Stack()
+
+        stack.push(node)
+
+        while len(stack) > 0:
+
+            node = stack.pop()
+
+            print(node.value)
+
+            if node.left:
+                stack.push(node.left)
+            if node.right:
+                stack.push(node.right)
+
+
+
+
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
